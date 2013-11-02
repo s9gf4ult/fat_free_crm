@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @commercial_offer.name %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @commercial_offer.content %>
+</p>
+
+<p>
+  <b>Contact:</b>
+  <%= @commercial_offer.contact_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_commercial_offer_path(@commercial_offer) %> |
+<%= link_to 'Back', commercial_offers_path %>
