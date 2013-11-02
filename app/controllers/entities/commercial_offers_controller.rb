@@ -1,4 +1,4 @@
-class CommercialOffersController < ApplicationController
+class CommercialOffersController < EntitiesController
   # GET /commercial_offers
   # GET /commercial_offers.json
   def index
