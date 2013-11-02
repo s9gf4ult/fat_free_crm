@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221033947) do
+ActiveRecord::Schema.define(:version => 20131102170740) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -132,6 +132,14 @@ ActiveRecord::Schema.define(:version => 20121221033947) do
     t.string   "state",            :limit => 16, :default => "Expanded", :null => false
   end
 
+  create_table "commercial_offers", :force => true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.integer  "contact_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "contact_opportunities", :force => true do |t|
     t.integer  "contact_id"
     t.integer  "opportunity_id"
@@ -216,10 +224,10 @@ ActiveRecord::Schema.define(:version => 20121221033947) do
     t.string   "hint"
     t.string   "placeholder"
     t.string   "as",             :limit => 32
-    t.text     "collection"
+    t.text     "collection",     :limit => 255
     t.boolean  "disabled"
     t.boolean  "required"
-    t.integer  "maxlength"
+    t.integer  "maxlength",      :limit => 4
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.integer  "pair_id"
