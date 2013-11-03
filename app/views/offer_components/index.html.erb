@@ -1,0 +1,25 @@
+<h1>Listing offer_components</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @offer_components.each do |offer_component| %>
+  <tr>
+    <td><%= offer_component.name %></td>
+    <td><%= offer_component.content %></td>
+    <td><%= link_to 'Show', offer_component %></td>
+    <td><%= link_to 'Edit', edit_offer_component_path(offer_component) %></td>
+    <td><%= link_to 'Destroy', offer_component, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Offer component', new_offer_component_path %>

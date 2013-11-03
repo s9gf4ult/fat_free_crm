@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @offer_component.name %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @offer_component.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_offer_component_path(@offer_component) %> |
+<%= link_to 'Back', offer_components_path %>
