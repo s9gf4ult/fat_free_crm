@@ -1,4 +1,4 @@
-class OfferComponentsController < ApplicationController
+class OfferComponentsController < EntitiesController
   # GET /offer_components
   # GET /offer_components.json
   def index
