@@ -231,6 +231,10 @@
   :url:
     :controller: users
     :action: opportunities_overview
+- :active: false
+  :text: :tab_commercial_offers
+  :url:
+    :controller: commercial_offers
 
 :admin_tabs:
 - :active: true
