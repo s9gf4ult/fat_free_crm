@@ -1,27 +1,3 @@
-<h1>Listing commercial_offers</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Content</th>
-    <th>Contact</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @commercial_offers.each do |commercial_offer| %>
-  <tr>
-    <td><%= commercial_offer.name %></td>
-    <td><%= commercial_offer.content %></td>
-    <td><%= commercial_offer.contact_id %></td>
-    <td><%= link_to 'Show', commercial_offer %></td>
-    <td><%= link_to 'Edit', edit_commercial_offer_path(commercial_offer) %></td>
-    <td><%= link_to 'Destroy', commercial_offer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
+<%= render :partial => "commercial_offers" %>
 
 <%= link_to 'New Commercial offer', new_commercial_offer_path %>

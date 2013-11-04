@@ -1,1 +1,23 @@
-= section(object, :commercial_offers)
+%h1 Listing commercial_offers
+%table
+  %tr
+    %th Name
+    - unless @contact
+      %th Contact
+    %th
+    %th
+    %th
+  - commercial_offers = @commercial_offers || @contact.commercial_offers
+  - commercial_offers.each do |commercial_offer|
+    %tr
+      %td= commercial_offer.name
+      - unless @contact
+        %td= link_to commercial_offer.contact.name, commercial_offer.contact
+      %td= link_to 'Show', commercial_offer
+      %td= link_to 'Edit', edit_commercial_offer_path(commercial_offer)
+      %td= link_to 'Destroy', commercial_offer, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+- unless @contact
+  = link_to 'New Commercial offer', new_commercial_offer_path
+- else
+  = link_to "New Commercial offer", new_commercial_offer_path(:contact_id => @contact.id)
