@@ -4,7 +4,6 @@
   = hidden_field_tag "task[user_id]", current_user.id
   = hidden_field_tag "task[asset_id]", "#{@asset.id if @asset}"
   = hidden_field_tag "task[asset_type]", "#{@asset.class if @asset}"
-
   = render "tasks/top_section",    :f => f
   = render "fields/groups", :f => f
 

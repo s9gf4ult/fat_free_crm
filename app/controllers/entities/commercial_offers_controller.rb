@@ -25,7 +25,7 @@ class CommercialOffersController < EntitiesController
   # GET /commercial_offers/new.json
   def new
     @commercial_offer = CommercialOffer.new
-
+    # @contact = Contact.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @commercial_offer }
@@ -41,6 +41,8 @@ class CommercialOffersController < EntitiesController
   # POST /commercial_offers.json
   def create
     @commercial_offer = CommercialOffer.new(params[:commercial_offer])
+    @contact = Contact.find params[:commercial_offer][:contact_id]
+    @commercial_offer.contact = @contact
 
     respond_to do |format|
       if @commercial_offer.save
