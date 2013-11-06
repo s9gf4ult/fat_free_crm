@@ -84,4 +84,35 @@ class CommercialOffersController < EntitiesController
       format.json { head :no_content }
     end
   end
+
+  # PUT
+  def attach_component
+    @commercial_offer = CommercialOffer.find params[:commercial_offer_id]
+    @offer_component = OfferComponent.find params[:offer_component_id]
+    unless @commercial_offer.offer_components.include? @offer_component
+      ComponentAssignment.create :offer_component => @offer_component, :commercial_offer => @commercial_offer
+      respond_to do |format|
+        format.html do
+          redirect_to @commercial_offer, :notice => "Offer component attached"
+        end
+      end
+    end
+  end
+
+  def deattach_component
+    @commercial_offer = CommercialOffer.find params[:commercial_offer_id]
+    @offer_component = OfferComponent.find params[:offer_component_id]
+    if @commercial_offer.offer_components.include? @offer_component
+      ComponentAssignment.destroy_all(:commercial_offer => @commercial_offer,
+                                      :offer_component => @offer_component)
+      respond_to do |format|
+        format.html do
+          redirect_to @commercial_offer, :notice => "Offer component detached"
+        end
+      end
+    end
+  end
+
+    
+  
 end

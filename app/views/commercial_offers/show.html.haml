@@ -9,6 +9,10 @@
   %b Contact:
   - c = @commercial_offer.contact
   = link_to c.name, c
+%p
+  %b Offer Components:
+  = render :partial => "offer_components/offer_components"
+  
 = link_to 'Edit', edit_commercial_offer_path(@commercial_offer)
 |
 \#{link_to 'Back', commercial_offers_path}

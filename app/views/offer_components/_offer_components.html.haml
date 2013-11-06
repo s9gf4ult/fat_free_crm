@@ -1,0 +1,24 @@
+%h1 Listing offer_components
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    - if @commercial_offer
+      %th
+  - if @commercial_offer
+    - offer_components = @commercial_offer.offer_components
+  - else
+    - offer_components = @offer_components
+  - offer_components.each do |offer_component|
+    %tr
+      %td= link_to offer_component.name, offer_component
+      - if @commercial_offer
+        %td= link_to (t :deattach), deattach_component_commer
+      %td= link_to 'Edit', edit_offer_component_path(offer_component)
+      %td= link_to 'Destroy', offer_component, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+- unless @commercial_offer
+  = link_to (t :new_offer_component), new_offer_component_path
+- else
+  = link_to (t :attach_commercial_offer), attach_component_commercial_offer_path(@commercial_offer)

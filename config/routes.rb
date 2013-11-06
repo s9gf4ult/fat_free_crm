@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   resources :offer_components
 
 
-  resources :commercial_offers
+  resources :commercial_offers do
+    member do
+      post :attach_component
+      delete :detach_component
+    end
+  end
 
 
   resources :lists
