@@ -26,6 +26,8 @@ class CommercialOffersController < EntitiesController
   def new
     @commercial_offer = CommercialOffer.new
     # @contact = Contact.new
+    cid = params[:contact_id]
+    @contact = Contact.find cid if cid
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @commercial_offer }

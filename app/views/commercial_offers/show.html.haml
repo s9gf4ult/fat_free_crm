@@ -1,0 +1,14 @@
+%p#notice= notice
+%p
+  %b Name:
+  = @commercial_offer.name
+%p
+  %b Content:
+  = @commercial_offer.content
+%p
+  %b Contact:
+  - c = @commercial_offer.contact
+  = link_to c.name, c
+= link_to 'Edit', edit_commercial_offer_path(@commercial_offer)
+|
+\#{link_to 'Back', commercial_offers_path}

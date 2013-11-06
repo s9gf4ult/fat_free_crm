@@ -6,14 +6,12 @@
       %th Contact
     %th
     %th
-    %th
   - commercial_offers = @commercial_offers || @contact.commercial_offers
   - commercial_offers.each do |commercial_offer|
     %tr
-      %td= commercial_offer.name
+      %td= link_to commercial_offer.name, commercial_offer
       - unless @contact
         %td= link_to commercial_offer.contact.name, commercial_offer.contact
-      %td= link_to 'Show', commercial_offer
       %td= link_to 'Edit', edit_commercial_offer_path(commercial_offer)
       %td= link_to 'Destroy', commercial_offer, method: :delete, data: { confirm: 'Are you sure?' }
 %br/

@@ -3,9 +3,9 @@
   .inputs
     = f.input :name
     = f.input :content
-    -# - unless @contact
-    = f.input :contact_id, :as => :select, :collection => Contact.all, :label_method => :name, :value_method => :id
-    -# - else 
-    -#   = f.input "contact", :as => :hidden
+    - unless @contact
+      = f.input :contact_id, :as => :select, :collection => Contact.all, :label_method => :name, :value_method => :id
+    - else
+      = f.input :contact_id, :as => :select, :collection => Contact.all, :label_method => :name, :value_method => :id, :selected => @contact.id
   .actions
     = f.button :submit
