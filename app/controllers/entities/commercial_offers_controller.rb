@@ -85,34 +85,57 @@ class CommercialOffersController < EntitiesController
     end
   end
 
-  # PUT
+  # GET
+  def edit_components
+    @commercial_offer = CommercialOffer.find params[:id]
+  end
+
+  # POST
+  def manage_component
+    if params[:attach]
+      attach_component
+    elsif params[:detach]
+      detach_component
+    end
+  end
+
+  private
+  
   def attach_component
-    @commercial_offer = CommercialOffer.find params[:commercial_offer_id]
-    @offer_component = OfferComponent.find params[:offer_component_id]
-    unless @commercial_offer.offer_components.include? @offer_component
-      ComponentAssignment.create :offer_component => @offer_component, :commercial_offer => @commercial_offer
-      respond_to do |format|
-        format.html do
-          redirect_to @commercial_offer, :notice => "Offer component attached"
+    cid = params[:detached_component_id]
+    if cid
+      @commercial_offer = CommercialOffer.find params[:id]
+      @offer_component = OfferComponent.find cid
+      unless @commercial_offer.offer_components.include? @offer_component
+        @commercial_offer.offer_components << @offer_component
+        respond_to do |format|
+          format.html do
+            redirect_to edit_components_commercial_offer_path(@commercial_offer), :notice => "Offer component attached"
+          end
         end
       end
+    else
+      head 200
     end
   end
 
-  def deattach_component
-    @commercial_offer = CommercialOffer.find params[:commercial_offer_id]
-    @offer_component = OfferComponent.find params[:offer_component_id]
-    if @commercial_offer.offer_components.include? @offer_component
-      ComponentAssignment.destroy_all(:commercial_offer => @commercial_offer,
-                                      :offer_component => @offer_component)
-      respond_to do |format|
-        format.html do
-          redirect_to @commercial_offer, :notice => "Offer component detached"
+  def detach_component
+    cid = params[:attached_component_id]
+    if cid
+      @commercial_offer = CommercialOffer.find params[:id]
+      @offer_component = OfferComponent.find cid
+      if @commercial_offer.offer_components.include? @offer_component
+        @commercial_offer.offer_components.delete @offer_component
+        respond_to do |format|
+          format.html do
+            redirect_to edit_components_commercial_offer_path(@commercial_offer), :notice => "Offer component detached"
+          end
         end
       end
+    else
+      head 200
     end
   end
-
     
   
 end

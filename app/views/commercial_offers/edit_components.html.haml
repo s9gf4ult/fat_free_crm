@@ -1,0 +1,5 @@
+%h1 Edit components for commercial offer #{link_to @commercial_offer.name, @commercial_offer}
+%p
+  - Setting.offer_component_types.each do |component_type|
+    = render :partial => "components_list", :locals => {:component_type => component_type}
+= link_to "Back", @commercial_offer

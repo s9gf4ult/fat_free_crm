@@ -9,8 +9,10 @@ Rails.application.routes.draw do
 
   resources :commercial_offers do
     member do
-      post :attach_component
-      delete :detach_component
+      get :edit_components
+      post :manage_component
+      # post :attach_component
+      # delete :detach_component
     end
   end
 

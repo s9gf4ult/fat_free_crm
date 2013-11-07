@@ -2,7 +2,7 @@ class OfferComponentsController < EntitiesController
   # GET /offer_components
   # GET /offer_components.json
   def index
-    @offer_components = OfferComponent.all
+    @offer_components = OfferComponent
 
     respond_to do |format|
       format.html # index.html.erb
