@@ -394,3 +394,11 @@ task_completed:
   - :completed_last_week
   - :completed_this_month
   - :completed_last_month
+
+offer_component_types:
+  - :plasmagun
+  - :machinegun
+  - :shotgun
+  - :grenade_launcher
+  - :lightning_gun
+  - :railgun

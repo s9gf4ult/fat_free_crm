@@ -90,19 +90,27 @@ class CommercialOffersController < EntitiesController
     @commercial_offer = CommercialOffer.find params[:id]
   end
 
+  # # POST
+  # def manage_component
+  #   if params[:attach]
+  #     attach_component
+  #   elsif params[:detach]
+  #     detach_component
+  #   end
+  # end
+
   # POST
-  def manage_component
-    if params[:attach]
-      attach_component
-    elsif params[:detach]
-      detach_component
-    end
+  def component_up
+
+  end
+  # POST
+  def component_down
+
   end
 
-  private
-  
+  # POST
   def attach_component
-    cid = params[:detached_component_id]
+    cid = params[:offer_component][:id]
     if cid
       @commercial_offer = CommercialOffer.find params[:id]
       @offer_component = OfferComponent.find cid
@@ -118,9 +126,10 @@ class CommercialOffersController < EntitiesController
       head 200
     end
   end
-
+  
+  # POST
   def detach_component
-    cid = params[:attached_component_id]
+    cid = params[:offer_component][:id]
     if cid
       @commercial_offer = CommercialOffer.find params[:id]
       @offer_component = OfferComponent.find cid
@@ -136,6 +145,4 @@ class CommercialOffersController < EntitiesController
       head 200
     end
   end
-    
-  
 end

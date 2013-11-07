@@ -1,0 +1,15 @@
+%table
+  %tr
+    %th Name
+    %th Type
+    %th Up
+    %th Down
+    %th Detach
+  - @commercial_offer.offer_components.each do |offer_component|
+    %tr
+      %td= link_to offer_component.name, offer_component
+      %td= offer_component.component_type
+      %td= link_to "UP", component_up_commercial_offer_path(@commercial_offer, "offer_component[id]" => offer_component.id), :method => :post
+      %td= link_to "DOWN", component_down_commercial_offer_path(@commercial_offer, "offer_component[id]" => offer_component.id), :method => :post
+      %td= link_to "DETACH", detach_component_commercial_offer_path(@commercial_offer, "offer_component[id]" => offer_component.id), :method => :post
+    

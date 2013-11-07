@@ -1,12 +1,9 @@
-%form{:method => :post, :action => manage_component_commercial_offer_path(@commercial_offer)}
-  %input{ :type => :hidden, :name => "commercial_offer[id]", :value => @commercial_offer.id }
-  %select.left{:size => 5, :name => :detached_component_id}
-    - OfferComponent.not_belongs_to(@commercial_offer).of_type(component_type).each do |offer_component|
-      %option{:value => offer_component.id} #{offer_component.name}
-  .center
-    %input{:type => :submit, :name => :attach, :value => "Attach"}
-    %input{:type => :submit, :name => :detach, :value => "Detach"}
-  %select.right{:size => 5, :name => :attached_component_id}
-    - @commercial_offer.offer_components.of_type(component_type).each do |offer_component|
-      %option{:value => offer_component.id} #{offer_component.name}
+%p
+  %h2 #{component_type.to_s.pluralize}
+  %form.detached_components{:method => :post, :action => attach_component_commercial_offer_path(@commercial_offer)}
+    %input{ :type => :hidden, :name => "commercial_offer[id]", :value => @commercial_offer.id }
+    %select{:size => 5, :name => "offer_component[id]"}
+      - OfferComponent.not_belongs_to(@commercial_offer).of_type(component_type).each do |offer_component|
+        %option{:value => offer_component.id}= offer_component.name
+    %input{:type => :submit, :value => "Attach"}
     
