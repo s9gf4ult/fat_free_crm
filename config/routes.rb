@@ -17,14 +17,8 @@ Rails.application.routes.draw do
   resources :commercial_offers do
     member do
       get :edit_components
-      # post :manage_component
-      post :component_up
-      post :component_down
-      post :attach_component
-      post :detach_component
     end
   end
-
 
   resources :lists
 
