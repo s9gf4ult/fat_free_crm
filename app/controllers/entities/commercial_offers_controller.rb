@@ -90,4 +90,12 @@ class CommercialOffersController < EntitiesController
     @commercial_offer = CommercialOffer.find params[:id]
   end
 
+  # POST
+  def regenerate_content
+    @commercial_offer = CommercialOffer.find params[:id]
+    @commercial_offer.regenerate_content
+    respond_to do |format|
+      format.html { redirect_to @commercial_offer }
+    end
+  end
 end

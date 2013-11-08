@@ -1,6 +1,7 @@
 class OfferComponent < ActiveRecord::Base
   attr_accessible :content, :name, :component_type
   validates :name, :presence => true, :uniqueness => true
+  validates :content, :presence => true
   validates :component_type, :presence => true
 
   has_many :component_assignments

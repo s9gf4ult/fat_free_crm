@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :commercial_offers do
     member do
       get :edit_components
+      post :regenerate_content
     end
   end
 

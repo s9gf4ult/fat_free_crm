@@ -1,4 +1,5 @@
 class ComponentAssignmentsController < ApplicationController
+
   # POST
   def create
     @commercial_offer = CommercialOffer.find params[:commercial_offer][:id]
@@ -11,11 +12,7 @@ class ComponentAssignmentsController < ApplicationController
                                       :offer_component_id => @offer_component.id,
                                       :order_value => m)
     end
-    respond_to do |format|
-      format.html do
-        redirect_to(edit_components_commercial_offer_path(@commercial_offer))
-      end
-    end
+    redirect_to_commercial_offer
   end
 
   # DELETE
@@ -24,16 +21,31 @@ class ComponentAssignmentsController < ApplicationController
     @commercial_offer = @ca.commercial_offer
     @offer_component = @ca.offer_component
     @commercial_offer.offer_components.delete @offer_component
+    redirect_to_commercial_offer
+  end
+
+  def move_up
+    @component_assignment = ComponentAssignment.find params[:id]
+    @commercial_offer = @component_assignment.commercial_offer
+    @component_assignment.move_up
+    redirect_to_commercial_offer
+  end
+
+  def move_down
+    @component_assignment = ComponentAssignment.find params[:id]
+    @commercial_offer = @component_assignment.commercial_offer
+    @component_assignment.move_down
+    redirect_to_commercial_offer
+  end
+
+  private
+
+  def redirect_to_commercial_offer
     respond_to do |format|
       format.html do
-        redirect_to(edit_components_commercial_offer_path(@commercial_offer))
+        redirect_to edit_components_commercial_offer_path(@commercial_offer)
       end
     end
   end
 
-  def move_up
-  end
-
-  def move_down
-  end
 end

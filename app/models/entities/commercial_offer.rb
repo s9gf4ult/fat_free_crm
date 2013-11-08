@@ -10,4 +10,14 @@ class CommercialOffer < ActiveRecord::Base
 
   sortable :by => ["name ASC", "created_at DESC", "updated_at DESC"], :default => "created_at DESC"
   has_paper_trail
+
+  def regenerate_content
+    if self.offer_components.count > 0
+      new_content = self.component_assignments.map do |cas|
+        cas.offer_component.content
+      end.join("\n")
+      self.content = new_content
+      self.save
+    end
+  end
 end

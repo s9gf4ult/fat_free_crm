@@ -6,3 +6,4 @@
   .right
     = render :partial => "attached_components"
 = link_to "Back", @commercial_offer
+= link_to "Regenerate content", regenerate_content_commercial_offer_path(@commercial_offer), :method => :post
