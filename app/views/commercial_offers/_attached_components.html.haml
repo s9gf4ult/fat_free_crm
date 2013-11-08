@@ -5,11 +5,12 @@
     %th Up
     %th Down
     %th Detach
-  - @commercial_offer.offer_components.each do |offer_component|
+  - @commercial_offer.component_assignments.each do |comp_assignment|
+    - offer_component = comp_assignment.offer_component
     %tr
       %td= link_to offer_component.name, offer_component
       %td= offer_component.component_type
-      %td= link_to "UP", component_up_commercial_offer_path(@commercial_offer, "offer_component[id]" => offer_component.id), :method => :post
-      %td= link_to "DOWN", component_down_commercial_offer_path(@commercial_offer, "offer_component[id]" => offer_component.id), :method => :post
-      %td= link_to "DETACH", detach_component_commercial_offer_path(@commercial_offer, "offer_component[id]" => offer_component.id), :method => :post
+      %td= link_to "UP", move_up_component_assignment_path(comp_assignment), :method => :post
+      %td= link_to "DOWN", move_down_component_assignment_path(comp_assignment), :method => :post      
+      %td= link_to "DETACH", comp_assignment, :method => :delete
     
