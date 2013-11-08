@@ -100,15 +100,6 @@ class CommercialOffersController < EntitiesController
   # end
 
   # POST
-  def component_up
-
-  end
-  # POST
-  def component_down
-
-  end
-
-  # POST
   def attach_component
     cid = params[:offer_component][:id]
     if cid
@@ -126,7 +117,7 @@ class CommercialOffersController < EntitiesController
       head 200
     end
   end
-  
+
   # POST
   def detach_component
     cid = params[:offer_component][:id]

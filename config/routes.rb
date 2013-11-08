@@ -4,8 +4,15 @@
 # See MIT-LICENSE file or http://www.opensource.org/licenses/mit-license.php
 #------------------------------------------------------------------------------
 Rails.application.routes.draw do
-  resources :offer_components
 
+  resources :component_assignment, :only => [:create, :delete] do
+    member do
+      post :move_up
+      post :move_down
+    end
+  end
+
+  resources :offer_components
 
   resources :commercial_offers do
     member do
