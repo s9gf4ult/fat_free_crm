@@ -1,0 +1,8 @@
+= simple_form_for(@document_template) do |f|
+  = f.error_notification
+  .inputs
+    = f.input :name
+    = f.input :content_before
+    = f.input :content_after
+  .actions
+    = f.button :submit

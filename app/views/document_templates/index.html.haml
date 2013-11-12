@@ -1,0 +1,19 @@
+%h1 Listing document_templates
+%table
+  %tr
+    %th Name
+    %th Content before
+    %th Content after
+    %th
+    %th
+    %th
+  - @document_templates.each do |document_template|
+    %tr
+      %td= document_template.name
+      %td= document_template.content_before
+      %td= document_template.content_after
+      %td= link_to 'Show', document_template
+      %td= link_to 'Edit', edit_document_template_path(document_template)
+      %td= link_to 'Destroy', document_template, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Document template', new_document_template_path

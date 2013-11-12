@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %b Name:
+  = @offer_component.name
+%p
+  %b Content:
+  = @offer_component.content
+= link_to 'Edit', edit_offer_component_path(@offer_component)
+|
+\#{link_to 'Back', offer_components_path}
