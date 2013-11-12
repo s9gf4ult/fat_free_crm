@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @document_template.name %>
+</p>
+
+<p>
+  <b>Content before:</b>
+  <%= @document_template.content_before %>
+</p>
+
+<p>
+  <b>Content after:</b>
+  <%= @document_template.content_after %>
+</p>
+
+
+<%= link_to 'Edit', edit_document_template_path(@document_template) %> |
+<%= link_to 'Back', document_templates_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108043607) do
+ActiveRecord::Schema.define(:version => 20131112163058) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -189,6 +189,14 @@ ActiveRecord::Schema.define(:version => 20131108043607) do
 
   add_index "contacts", ["assigned_to"], :name => "index_contacts_on_assigned_to"
   add_index "contacts", ["user_id", "last_name", "deleted_at"], :name => "id_last_name_deleted", :unique => true
+
+  create_table "document_templates", :force => true do |t|
+    t.string   "name"
+    t.text     "content_before"
+    t.text     "content_after"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "emails", :force => true do |t|
     t.string   "imap_message_id",                                       :null => false

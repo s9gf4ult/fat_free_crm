@@ -5,6 +5,9 @@
 #------------------------------------------------------------------------------
 Rails.application.routes.draw do
 
+  resources :document_templates
+
+
   resources :component_assignments, :only => [:create, :destroy, :show] do
     member do
       post :move_up
