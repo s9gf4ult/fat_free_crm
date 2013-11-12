@@ -98,4 +98,18 @@ class CommercialOffersController < EntitiesController
       format.html { redirect_to @commercial_offer }
     end
   end
+
+  # POST
+  def attach_document_template
+    @commercial_offer = CommercialOffer.find params[:id]
+    @document_template = DocumentTemplate.find params[:document_template][:id]
+    @commercial_offer.document_template = @document_template
+    respond_to do |format|
+      if @commercial_offer.save
+        format.html {redirect_to edit_components_commercial_offer_path(@commercial_offer)}
+      else
+        format.html {redirect_to edit_components_commercial_offer_path(@commercial_offer), :warning => "Not saved"}
+      end
+    end
+  end
 end

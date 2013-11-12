@@ -1,1 +1,5 @@
-%p Placeholder
+%form{:method => :post, :action => attach_document_template_commercial_offer_path(@commercial_offer)}
+  %select{:name => "document_template[id]"}
+    - DocumentTemplate.all.each do |template|
+      %option{:value => template.id}= template.name
+  %input{:type => :submit, :value => "Attach"}

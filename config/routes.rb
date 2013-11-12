@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     member do
       get :edit_components
       post :regenerate_content
+      post :attach_document_template
     end
   end
 

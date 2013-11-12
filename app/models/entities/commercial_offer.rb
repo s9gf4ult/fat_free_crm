@@ -1,6 +1,7 @@
 class CommercialOffer < ActiveRecord::Base
-  attr_accessible :content, :name, :contact_id
+  attr_accessible :content, :name, :contact_id, :document_template_id
   belongs_to :contact
+  belongs_to :document_template
 
   has_many :component_assignments
   has_many :offer_components, :through => :component_assignments
@@ -16,6 +17,12 @@ class CommercialOffer < ActiveRecord::Base
       new_content = self.component_assignments.map do |cas|
         cas.offer_component.content
       end.join("\n")
+
+      t = self.document_template
+      if t
+        new_content = t.content_before << "\n" << new_content << "\n" << t.content_after
+      end
+
       self.content = new_content
       self.save
     end
