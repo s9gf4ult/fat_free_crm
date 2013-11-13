@@ -1,5 +1,5 @@
 class CommercialOffer < ActiveRecord::Base
-  attr_accessible :content, :name, :contact_id, :document_template_id
+  attr_accessible :content, :name, :contact_id, :document_template_id, :preview_file_name
   belongs_to :contact
   belongs_to :document_template
 
