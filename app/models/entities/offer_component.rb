@@ -1,8 +1,11 @@
 class OfferComponent < ActiveRecord::Base
+  include ContentStuff
+
   attr_accessible :content, :name, :component_type, :preview_file_name
   validates :name, :presence => true, :uniqueness => true
   validates :content, :presence => true
   validates :component_type, :presence => true
+  validates :preview_file_name, :uniqueness => true
 
   has_many :component_assignments
   has_many :commercial_offers, :through => :component_assignments
