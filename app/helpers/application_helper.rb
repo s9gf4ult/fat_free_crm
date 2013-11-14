@@ -470,4 +470,9 @@ module ApplicationHelper
     end
   end
 
+  def thing_path(t)
+    x = (t.class.to_s.underscore << "_path")
+    send(x, t)
+  end
+
 end

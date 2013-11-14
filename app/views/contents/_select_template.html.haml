@@ -1,5 +1,5 @@
 %p
-  %form
+  %form{:action => download_pdf_of_path(@parent), :method => :get}
     .inputs
       %label{:for => "document_template[id]"} Document template 
       %select{:name => "document_template[id]"}

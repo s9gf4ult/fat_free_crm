@@ -3,7 +3,7 @@
   %b Name:
   = @commercial_offer.name
 %p
-  = link_to "Edit content", (commercial_offer_path(@commercial_offer) << '/content')
+  = link_to "Edit content", content_of_path(@commercial_offer)
 %p
   %b Contact:
   - c = @commercial_offer.contact

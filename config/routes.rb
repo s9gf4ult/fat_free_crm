@@ -17,7 +17,11 @@ Rails.application.routes.draw do
 
   resources :offer_components do
     member do
-      resource :content, :only => [:show]
+      resource :content, :only => [:show]do
+        member do
+          get :download_pdf
+        end
+      end
     end
   end
 
@@ -26,7 +30,11 @@ Rails.application.routes.draw do
       get :edit_components
       post :regenerate_content
       post :attach_document_template
-      resource :content, :only => [:show]
+      resource :content, :only => [:show] do
+        member do
+          get :download_pdf
+        end
+      end
     end
   end
 

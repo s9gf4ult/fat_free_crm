@@ -47,6 +47,7 @@ class OfferComponentsController < EntitiesController
         format.html { redirect_to @offer_component, notice: 'Offer component was successfully created.' }
         format.json { render json: @offer_component, status: :created, location: @offer_component }
       else
+        puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> pidaras"
         format.html { render action: "new" }
         format.json { render json: @offer_component.errors, status: :unprocessable_entity }
       end

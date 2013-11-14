@@ -1,4 +1,4 @@
 %p
-  = simple_form_for @parent do |f|
+  = simple_form_for @parent, :method => :put do |f|
     = f.input :content
     = f.submit

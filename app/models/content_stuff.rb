@@ -7,6 +7,7 @@ module ContentStuff
   
   module InstanceMethods
     def regenerate_preview_file(template)
+      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "
       unless self.preview_file_name
         self.preview_file_name = generate_new_preview_filename
       end
@@ -24,14 +25,15 @@ module ContentStuff
       
       generate_tex texfn, template
 
-      run_latex texfn
+      res = run_latex texfn
       self.save
+      res
     end
     
     protected
     def generate_new_preview_filename
       File::join("pdf",
-                 self.class.to_s.pluralize,
+                 self.class.to_s.pluralize.underscore,
                  self.id.to_s,
                  "output.pdf")
     end
@@ -52,11 +54,20 @@ module ContentStuff
     end
 
     def run_latex(texfile)
-      puts "run latex, #{texfile}"
+      dir = File::dirname texfile
+      name = File::basename texfile
+      out = `cd #{dir} && xelatex #{name}`
+      if $? == 0
+        false
+      else
+        out
+      end
     end
 
     def remove_crlf_content
-      self.content = self.content.gsub /\r\n?/, "\n"
+      if self.content
+        self.content = self.content.gsub /\r\n?/, "\n"
+      end
     end
   end
 end
