@@ -15,13 +15,18 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :offer_components
+  resources :offer_components do
+    member do
+      resource :content, :only => [:show]
+    end
+  end
 
   resources :commercial_offers do
     member do
       get :edit_components
       post :regenerate_content
       post :attach_document_template
+      resource :content, :only => [:show]
     end
   end
 

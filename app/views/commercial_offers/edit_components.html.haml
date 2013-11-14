@@ -5,6 +5,5 @@
       = render :partial => "components_list", :locals => {:component_type => component_type}
   .right
     = render :partial => "attached_components"
-    = render :partial => "select_template"
 = link_to "Back", @commercial_offer
 = link_to "Regenerate content", regenerate_content_commercial_offer_path(@commercial_offer), :method => :post

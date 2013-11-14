@@ -1,0 +1,9 @@
+%p
+  %form
+    .inputs
+      %label{:for => "document_template[id]"} Document template 
+      %select{:name => "document_template[id]"}
+        - DocumentTemplate.all.each do |templ|
+          %option{:value => templ.id}=  templ.name
+    .buttons 
+      %input{:type => :submit, :value => "Download pdf"}
