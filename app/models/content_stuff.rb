@@ -2,12 +2,12 @@ module ContentStuff
   extend ActiveSupport::Concern
 
   included do
+    include ContentHelper
     before_save :remove_crlf_content
   end
   
   module InstanceMethods
     def regenerate_preview_file(template)
-      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> "
       unless self.preview_file_name
         self.preview_file_name = generate_new_preview_filename
       end
@@ -28,6 +28,22 @@ module ContentStuff
       res = run_latex texfn
       self.save
       res
+    end
+
+    def my_pictures
+      mydir = File::join(Rails.root,
+                         'public',
+                         thing_pictures_path(self))
+      if File::exists? mydir
+        (Dir::entries mydir).find_all do |fn|
+          # puts "#{fn} - #{File::directory?(fn)}"
+          not File::directory?(File::join(mydir, fn))
+        end.map do |fn|
+          File::join("/", thing_pictures_path(self), fn)
+        end
+      else
+        []
+      end
     end
     
     protected

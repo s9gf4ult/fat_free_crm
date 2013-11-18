@@ -25,4 +25,11 @@ class CommercialOffer < ActiveRecord::Base
       self.save
     end
   end
+
+  def component_pictures
+    self.offer_components.flat_map do |oc|
+      oc.my_pictures
+    end
+  end
+
 end

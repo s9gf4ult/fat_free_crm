@@ -1,0 +1,28 @@
+%div
+  - if @parent.respond_to? :component_pictures
+    %table.pictures
+      %tr
+        %th Picture
+        %th Insert
+      - @parent.component_pictures.each do |pic|
+        %tr
+          %td
+            %img{:src => pic}
+          %td INSERT
+
+  %table.pictures
+    %tr
+      %th Picture
+      %th Delete
+      %th Insert
+    - @parent.my_pictures.each do |pic|
+      %tr
+        %td
+          %img{:src => pic}
+        %td= link_to("Delete", delete_picture_of_path(@parent, :picture => File::basename(pic)), :method => :post)
+        %td INSERT
+
+%div
+  %form{:action => upload_picture_for_path(@parent), :method => :post, :enctype => 'multipart/form-data'}
+    = file_field_tag "picture"
+    %input{:type => :submit, :value => "Upload"}

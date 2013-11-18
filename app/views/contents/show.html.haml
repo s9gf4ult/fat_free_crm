@@ -1,5 +1,10 @@
-%div
-  = render :partial => "select_template"
-%div
-  = render :partial => "save_content"
+.left
+  %div
+    = render :partial => "select_template"
+  %div
+    = render :partial => "save_content"
+
+.right
+  = render :partial => "pictures"
+  
 = link_to "Back", @parent

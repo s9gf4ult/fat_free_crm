@@ -1,3 +1,5 @@
+
+
 class OfferComponent < ActiveRecord::Base
   include ContentStuff
 
@@ -19,4 +21,5 @@ class OfferComponent < ActiveRecord::Base
 where component_assignments.offer_component_id = offer_components.id
 and component_assignments.commercial_offer_id = ?)", comoffer.id)
   }
+
 end

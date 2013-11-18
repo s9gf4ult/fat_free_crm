@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       resource :content, :only => [:show]do
         member do
           get :download_pdf
+          post :upload_picture
+          post :delete_picture
         end
       end
     end
@@ -33,6 +35,8 @@ Rails.application.routes.draw do
       resource :content, :only => [:show] do
         member do
           get :download_pdf
+          post :upload_picture
+          post :delete_picture
         end
       end
     end
