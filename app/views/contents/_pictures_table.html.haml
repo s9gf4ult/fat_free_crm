@@ -7,8 +7,8 @@
   - pictures.each do |pic|
     %tr
       %td
-        %img{:src => pic}
+        %img.picture{:src => pic}
       - if delete
         %td= link_to("Delete", delete_picture_of_path(@parent, :picture => File::basename(pic)), :method => :post)
       - insjs = render :partial => "insert_js", :locals => {:picture => pic}, :formats => [:js]
-      %td= link_to("INSERT", '#', :onclick => "#{insjs}")
+      %td= link_to("Insert", '#', :onclick => "#{insjs}")

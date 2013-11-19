@@ -2,13 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.left, .right {
-    display: inline-block;
-}
-
 .detached_components > select {
-    min-height: 10em;
-    min-width: 20em;
+    min-height: 100px;
+    min-width: 300px;
 }
 
 .detached_components > * {

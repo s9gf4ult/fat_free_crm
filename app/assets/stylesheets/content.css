@@ -1,0 +1,23 @@
+
+.left {
+    display: inline-block;
+    width: 60%;
+    vertical-align: top;
+}
+
+.right {
+    display: inline-block;
+    width: 35%;
+    vertical-align: top;
+}
+
+.picture {
+    max-width: 95px;
+    height: auto;
+}
+
+.edit_commercial_offer textarea,
+.edit_offer_component textarea {
+    width: 100%;
+    min-height: 300px;
+}
