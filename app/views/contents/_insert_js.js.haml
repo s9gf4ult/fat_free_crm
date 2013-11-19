@@ -1,0 +1,11 @@
+- id = @parent.class.to_s.underscore << '_content'
+var a = window.document.getElementById('#{id}');
+var text = '\n\\includegraphics[width=\linewidth]{#{picture}}\n';
+var startPos = a.selectionStart;
+var endPos = a.selectionEnd;
+var scrollTop = a.scrollTop;
+a.value = a.value.substring(0, startPos) + text + a.value.substring(endPos, a.value.length);
+a.focus();
+a.selectionStart = startPos + text.length;
+a.selectionEnd = startPos + text.length;
+a.scrollTop = scrollTop;

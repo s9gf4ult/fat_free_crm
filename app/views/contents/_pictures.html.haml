@@ -1,26 +1,7 @@
 %div
   - if @parent.respond_to? :component_pictures
-    %table.pictures
-      %tr
-        %th Picture
-        %th Insert
-      - @parent.component_pictures.each do |pic|
-        %tr
-          %td
-            %img{:src => pic}
-          %td INSERT
-
-  %table.pictures
-    %tr
-      %th Picture
-      %th Delete
-      %th Insert
-    - @parent.my_pictures.each do |pic|
-      %tr
-        %td
-          %img{:src => pic}
-        %td= link_to("Delete", delete_picture_of_path(@parent, :picture => File::basename(pic)), :method => :post)
-        %td INSERT
+    = render :partial => "pictures_table", :locals => {:pictures => @parent.component_pictures, :delete => false}
+  = render :partial => "pictures_table", :locals => {:pictures => @parent.my_pictures, :delete => true}
 
 %div
   %form{:action => upload_picture_for_path(@parent), :method => :post, :enctype => 'multipart/form-data'}

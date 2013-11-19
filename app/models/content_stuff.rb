@@ -5,7 +5,7 @@ module ContentStuff
     include ContentHelper
     before_save :remove_crlf_content
   end
-  
+
   module InstanceMethods
     def regenerate_preview_file(template)
       unless self.preview_file_name
@@ -19,10 +19,10 @@ module ContentStuff
       unless File::exists? dir
         FileUtils.mkdir_p dir
       end
-      
+
       name = File::basename fn, '.pdf'
       texfn = File::join dir, (name << ".tex")
-      
+
       generate_tex texfn, template
 
       res = run_latex texfn
@@ -45,7 +45,7 @@ module ContentStuff
         []
       end
     end
-    
+
     protected
     def generate_new_preview_filename
       File::join("pdf",
@@ -61,9 +61,12 @@ module ContentStuff
         pre << template.content_before << "\n"
         post << template.content_after << "\n"
       end
-      
+
+      pubpath = File::join(Rails.root, 'public', '/')
+
       File.open texfile, 'w' do |f|
         f << pre
+        f << "\n\\graphicspath\{ \{#{pubpath}\} \}\n"
         f << self.content
         f << post
       end

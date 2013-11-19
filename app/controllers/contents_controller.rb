@@ -48,7 +48,21 @@ class ContentsController < ApplicationController
 
   # POST
   def delete_picture
-
+    pic = params[:picture]
+    fname = File::join(Rails.root,
+                       'public',
+                       thing_pictures_path(@parent),
+                       pic)
+    respond_to do |format|
+      format.html do
+        if File::exists? fname
+          File::delete fname
+          redirect_to content_of_path(@parent), :note => "File deleted"
+        else
+          redirect_to content_of_path(@parent), :note => "File does not exists"
+        end
+      end
+    end
   end
 
 
