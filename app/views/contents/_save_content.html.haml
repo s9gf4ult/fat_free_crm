@@ -1,4 +1,4 @@
 %p
   = simple_form_for @parent, :method => :put do |f|
-    = f.input :content
+    = f.input :content, :input_html =>{:spellcheck => "false"}
     = f.submit

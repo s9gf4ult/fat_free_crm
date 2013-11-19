@@ -20,4 +20,6 @@
 .edit_offer_component textarea {
     width: 100%;
     min-height: 300px;
+    font-family: monospace;
+    font-size: 1.4em;
 }
