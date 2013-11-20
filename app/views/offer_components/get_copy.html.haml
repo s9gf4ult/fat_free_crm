@@ -1,0 +1,13 @@
+%h1 Copy of #{link_to @original_component.name, @original_component}
+
+%p
+  = simple_form_for @offer_component do |f|
+    = f.error_notification
+    = f.input :content, :as => :hidden
+    .inputs
+      = f.input :name
+      = f.input :component_type, :collection => Setting.offer_component_types
+    .actions
+      = f.button :submit
+%div
+  = link_to "Back", offer_components_path

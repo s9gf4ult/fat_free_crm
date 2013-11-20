@@ -4,6 +4,7 @@ module ContentStuff
   included do
     include ContentHelper
     before_save :remove_crlf_content
+    after_destroy :remove_files
   end
 
   module InstanceMethods
@@ -87,6 +88,19 @@ module ContentStuff
     def remove_crlf_content
       if self.content
         self.content = self.content.gsub /\r\n?/, "\n"
+      end
+    end
+
+    def remove_files
+      pics = File::join(Rails.root,
+                        'public',
+                        thing_pictures_path(self))
+      FileUtils::rm_rf pics
+      if self.preview_file_name
+        pdfs = File::dirname File::join(Rails.root,
+                                        'public',
+                                        self.preview_file_name)
+        FileUtils::rm_rf pdfs
       end
     end
   end
