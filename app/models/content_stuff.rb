@@ -75,7 +75,8 @@ module ContentStuff
     def run_latex(texfile)
       dir = File::dirname texfile
       name = File::basename texfile
-      out = `cd #{dir} && xelatex #{name}`
+      texcmd = "xelatex -halt-on-error \"#{name}\""
+      out = `cd "#{dir}" && #{texcmd} && #{texcmd}`
       if $? == 0
         false
       else
