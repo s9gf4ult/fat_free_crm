@@ -26,7 +26,7 @@ module ContentStuff
 
       generate_tex texfn, template
 
-      res = run_latex texfn
+      res = run_latex texfn, template.program_name
       self.save
       res
     end
@@ -73,15 +73,18 @@ module ContentStuff
       end
     end
 
-    def run_latex(texfile)
+    def run_latex(texfile, program_name)
       dir = File::dirname texfile
       name = File::basename texfile
-      texcmd = "xelatex -halt-on-error \"#{name}\""
+      texcmd = "#{program_name} -halt-on-error \"#{name}\""
       out = `cd "#{dir}" && #{texcmd} && #{texcmd}`
       if $? == 0
         false
       else
-        out
+        out.encode('utf8',
+                   'utf8',
+                   :invalid => :replace,
+                   :undef => :replace) # remove invalid symbols from pdflatex
       end
     end
 

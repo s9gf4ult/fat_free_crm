@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131113072044) do
+ActiveRecord::Schema.define(:version => 20131122100148) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(:version => 20131113072044) do
     t.text     "content_after"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "program_name"
   end
 
   create_table "emails", :force => true do |t|

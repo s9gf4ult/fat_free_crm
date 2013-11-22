@@ -2,6 +2,7 @@
   = f.error_notification
   .inputs
     = f.input :name
+    = f.input :program_name, :collection => Setting["document_templates"][:program_names]
     = f.input :content_before
     = f.input :content_after
   .actions

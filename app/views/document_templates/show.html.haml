@@ -3,11 +3,9 @@
   %b Name:
   = @document_template.name
 %p
-  %b Content before:
-  = @document_template.content_before
-%p
-  %b Content after:
-  = @document_template.content_after
+  %b Program name:
+  = @document_template.program_name
+
 = link_to 'Edit', edit_document_template_path(@document_template)
 |
 \#{link_to 'Back', document_templates_path}
