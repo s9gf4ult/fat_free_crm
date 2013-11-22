@@ -3,7 +3,12 @@ class ComponentAssignmentsController < ApplicationController
   # POST
   def create
     @commercial_offer = CommercialOffer.find params[:commercial_offer][:id]
-    @offer_component = OfferComponent.find params[:offer_component][:id]
+    @offer_component = OfferComponent.find params[:offer_component][:id] if params[:offer_component]
+    unless @offer_component
+      redirect_to_commercial_offer
+      return
+    end
+
     unless @commercial_offer.offer_components.include? @offer_component
       m = ComponentAssignment
         .where(:commercial_offer_id => @commercial_offer.id)
