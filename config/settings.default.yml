@@ -239,7 +239,7 @@
   :text: :tab_offer_components
   :url:
     :controller: offer_components
-    
+
 
 :admin_tabs:
 - :active: true
@@ -402,3 +402,8 @@ offer_component_types:
   - :grenade_launcher
   - :lightning_gun
   - :railgun
+
+document_templates:
+  :program_names:
+    - xelatex
+    - pdflatex
