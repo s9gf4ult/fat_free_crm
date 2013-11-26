@@ -1,4 +1,6 @@
 module ContentStuff
+  require 'iconv'
+
   extend ActiveSupport::Concern
 
   included do
@@ -81,10 +83,12 @@ module ContentStuff
       if $? == 0
         false
       else
-        out.encode('utf8',
-                   'utf8',
-                   :invalid => :replace,
-                   :undef => :replace) # remove invalid symbols from pdflatex
+        ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+        ic.iconv out            # remove invalid characters
+        # out.encode('utf8',
+        #            'utf8',
+        #            :invalid => :replace,
+        #            :undef => :replace) # remove invalid symbols from pdflatex
       end
     end
 
