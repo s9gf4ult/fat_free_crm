@@ -4,7 +4,7 @@ class OfferComponent < ActiveRecord::Base
   include ContentStuff
 
   attr_accessible :content, :name, :component_type, :preview_file_name
-  validates :name, :presence => true, :uniqueness => true
+  validates :name, :presence => true, :uniqueness => {:scope => :component_type}
   validates :component_type, :presence => true
 
   has_many :component_assignments
