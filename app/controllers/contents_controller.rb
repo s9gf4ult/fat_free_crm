@@ -10,7 +10,8 @@ class ContentsController < ApplicationController
   # GET
   def download_pdf
     @template = DocumentTemplate.find params[:document_template][:id]
-    res = @parent.regenerate_preview_file(@template)
+    @definition = OfferComponent.find params[:definition_id] if params[:definition_id]
+    res = @parent.regenerate_preview_file(@template, @definition)
     respond_to do |format|
       if res
         @result = res

@@ -5,7 +5,7 @@ class CommercialOffer < ActiveRecord::Base
   belongs_to :contact
   belongs_to :document_template
 
-  has_many :component_assignments
+  has_many :component_assignments, :dependent => :destroy
   has_many :offer_components, :through => :component_assignments
 
   validates :name, :presence => true, :uniqueness => {:scope => :contact_id}
@@ -17,8 +17,10 @@ class CommercialOffer < ActiveRecord::Base
 
   def regenerate_content
     if self.offer_components.count > 0
-      new_content = self.component_assignments.map do |cas|
-        cas.offer_component.content
+      new_content = self.offer_components.map do |component|
+        "\n% ======== BEGIN COMPONENT #{component.component_type}/#{component.name} ======== \n" <<
+          component.content <<
+          "\n% ======== END COMPONENT #{component.component_type}/#{component.name} ======== \n"
       end.join("\n")
 
       self.content = new_content

@@ -48,7 +48,7 @@ class Contact < ActiveRecord::Base
   has_one     :business_address, :dependent => :destroy, :as => :addressable, :class_name => "Address", :conditions => "address_type = 'Business'"
   has_many    :addresses, :dependent => :destroy, :as => :addressable, :class_name => "Address" # advanced search uses this
   has_many    :emails, :as => :mediator
-  has_many    :commercial_offers
+  has_many    :commercial_offers, :dependent => :destroy
 
   delegate :campaign, :to => :lead, :allow_nil => true
 

@@ -396,12 +396,15 @@ task_completed:
   - :completed_last_month
 
 offer_component_types:
-  - :plasmagun
-  - :machinegun
-  - :shotgun
-  - :grenade_launcher
-  - :lightning_gun
-  - :railgun
+  - :definition
+  - :title_page
+  - :preambule
+  - :powersource
+  - :cutter
+  - :cnc
+  - :software
+  - :footer
+  - :other
 
 document_templates:
   :program_names:

@@ -1,4 +1,9 @@
-%h1 Content for #{link_to @parent.name, @parent}
+- if @parent.is_a? OfferComponent
+  %h1 Content for component(#{@parent.component_type}) #{link_to @parent.name, @parent}
+- elsif @parent.is_a? CommercialOffer
+  %h1 Content for commercial offer #{link_to @parent.name, @parent}
+- else
+  %h1 Content for #{link_to @parent.name, @parent}
 
 .left
   %div

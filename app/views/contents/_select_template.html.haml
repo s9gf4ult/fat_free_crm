@@ -1,9 +1,16 @@
 %p
   %form{:action => download_pdf_of_path(@parent), :method => :get}
     .inputs
-      %label{:for => "document_template[id]"} Document template 
-      %select{:name => "document_template[id]"}
-        - DocumentTemplate.all.each do |templ|
-          %option{:value => templ.id}=  templ.name
-    .buttons 
+      - if @parent.is_a? OfferComponent
+        %div
+          %label{:for => "definition_id"} Definition
+          %select{:name => "definition_id"}
+            - OfferComponent.where(:component_type => "definition").each do |definition|
+              %option{:value => definition.id}= definition.name
+      %div
+        %label{:for => "document_template[id]"} Document template
+        %select{:name => "document_template[id]"}
+          - DocumentTemplate.all.each do |templ|
+            %option{:value => templ.id}=  templ.name
+    .buttons
       %input{:type => :submit, :value => "Download pdf"}
