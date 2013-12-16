@@ -295,6 +295,9 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    unicorn-rails (1.1.0)
+      rack
+      unicorn
     valium (0.5.0)
       activerecord (>= 3.0.2)
     websocket (1.0.7)
@@ -363,6 +366,7 @@ DEPENDENCIES
   turbo-sprockets-rails3
   uglifier (>= 1.0.3)
   unicorn
+  unicorn-rails
   valium
   will_paginate (~> 3.0.2)
   zeus

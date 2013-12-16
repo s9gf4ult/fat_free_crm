@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 # gem 'mysql2'
 gem 'sqlite3'
 # gem 'pg'
+gem "unicorn-rails"
+
 
 # Allows easy switching between locally developed gems, and gems installed from rubygems.org
 # See README for more info at: https://github.com/ndbroadbent/bundler_local_development
