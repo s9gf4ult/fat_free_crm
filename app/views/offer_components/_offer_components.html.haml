@@ -5,12 +5,18 @@
     %table
       %tr
         %th Name
+        %th Pdf
         %th
         %th
         %th
       - @offer_components.of_type(component_type).each do |offer_component|
         %tr
           %td= link_to offer_component.name, offer_component
+          %td
+            - if offer_component.preview_file_name
+              = link_to "Download PDF", File::join("/", offer_component.preview_file_name)
+            - else
+              Pdf is not ready
           %td= link_to 'Edit', edit_offer_component_path(offer_component)
           %td= link_to 'Destroy', offer_component, method: :delete, data: { confirm: 'Are you sure?' }
           %td= link_to "Copy", get_copy_offer_component_path(offer_component)

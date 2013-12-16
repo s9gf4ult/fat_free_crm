@@ -2,6 +2,7 @@
 %table
   %tr
     %th Name
+    %th Pdf
     - unless @contact
       %th Contact
     %th
@@ -10,6 +11,11 @@
   - commercial_offers.each do |commercial_offer|
     %tr
       %td= link_to commercial_offer.name, commercial_offer
+      %td
+        - if commercial_offer.preview_file_name
+          = link_to "Download PDF", File::join("/", commercial_offer.preview_file_name)
+        - else
+          Pdf is not ready
       - unless @contact
         %td= link_to commercial_offer.contact.name, commercial_offer.contact
       %td= link_to 'Edit', edit_commercial_offer_path(commercial_offer)
