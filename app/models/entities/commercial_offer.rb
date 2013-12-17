@@ -1,7 +1,7 @@
 class CommercialOffer < ActiveRecord::Base
   include ContentStuff
 
-  attr_accessible :content, :name, :contact_id, :document_template_id, :preview_file_name
+  attr_accessible :content, :name, :contact_id, :document_template_id, :preview_file_name, :definitions
   belongs_to :contact
   belongs_to :document_template
 

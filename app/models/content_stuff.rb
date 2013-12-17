@@ -10,7 +10,7 @@ module ContentStuff
   end
 
   module InstanceMethods
-    def regenerate_preview_file(template, definition = nil)
+    def regenerate_preview_file(template)
       unless self.preview_file_name
         self.preview_file_name = generate_new_preview_filename
       end
@@ -26,7 +26,7 @@ module ContentStuff
       name = File::basename fn, '.pdf'
       texfn = File::join dir, (name << ".tex")
 
-      generate_tex texfn, template, definition
+      generate_tex texfn, template
 
       res = run_latex texfn, template.program_name
       self.save
@@ -57,12 +57,12 @@ module ContentStuff
                  "output.pdf")
     end
 
-    def generate_tex(texfile, template, definition)
+    def generate_tex(texfile, template)
       pre = ''
       post = ''
-      if definition
-        pre << definition.content << "\n"
-      end
+      # if definition
+      #   pre << definition.content << "\n"
+      # end
 
       if template
         pre << template.content_before << "\n"

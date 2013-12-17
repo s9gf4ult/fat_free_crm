@@ -3,7 +3,7 @@
 class OfferComponent < ActiveRecord::Base
   include ContentStuff
 
-  attr_accessible :content, :name, :component_type, :preview_file_name
+  attr_accessible :content, :name, :component_type, :preview_file_name, :definitions
   validates :name, :presence => true, :uniqueness => {:scope => :component_type}
   validates :component_type, :presence => true
 

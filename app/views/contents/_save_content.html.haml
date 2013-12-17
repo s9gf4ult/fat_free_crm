@@ -1,4 +1,6 @@
 %p
   = simple_form_for @parent, :method => :put do |f|
+    - if @parent.is_a? CommercialOffer
+      = f.input :definitions, :input_html => {:spellcheck => "false"}
     = f.input :content, :input_html =>{:spellcheck => "false"}
     = f.submit
