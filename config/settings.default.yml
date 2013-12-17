@@ -396,7 +396,6 @@ task_completed:
   - :completed_last_month
 
 offer_component_types:
-  - :definition
   - :title_page
   - :preambule
   - :powersource

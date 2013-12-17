@@ -5,7 +5,7 @@ module ContentStuff
 
   included do
     include ContentHelper
-    before_save :remove_crlf_content
+    before_save :remove_crlf_content, :merge_definitions
     after_destroy :remove_files
   end
 
@@ -49,6 +49,47 @@ module ContentStuff
       end
     end
 
+    def parsed_definitions
+      ret = {}
+      if self.definitions
+        self.definitions.split(/\n/).each do |line|
+          m = /^\ *(#[a-zA-Z_]{1,20}#)(.*)$/.match line
+          if m
+            ret[m[1]] = m[2].strip
+          end
+        end
+      end
+      ret
+    end
+
+    def parsed_definitions=(defs)
+      keys = defs.keys.sort
+      self.definitions = keys.map do |key|
+        "#{key} #{defs[key]}"
+      end.join "\n"
+    end
+
+    def content_definitions
+      self.content.scan(/\\#[a-zA-Z_]{1,20}\\#/).map do |key|
+        key.gsub '\#', '#'
+      end
+    end
+
+    def content_with_definitions
+      if self.definitions
+        ret = self.content
+        self.parsed_definitions.each do |k, v|
+          if v && v.length > 0
+            subk = k.gsub '#', '\#'
+            ret = ret.gsub subk, v
+          end
+        end
+        ret
+      else
+        self.content
+      end
+    end
+
     protected
     def generate_new_preview_filename
       File::join("pdf",
@@ -60,13 +101,10 @@ module ContentStuff
     def generate_tex(texfile, template)
       pre = ''
       post = ''
-      # if definition
-      #   pre << definition.content << "\n"
-      # end
 
       if template
         pre << template.content_before << "\n"
-        post << template.content_after << "\n"
+        post << "\n" << template.content_after
       end
 
       pubpath = File::join(Rails.root, 'public', '/')
@@ -74,7 +112,7 @@ module ContentStuff
       File.open texfile, 'w' do |f|
         f << pre
         f << "\n\\graphicspath\{ \{#{pubpath}\} \}\n"
-        f << self.content
+        f << self.content_with_definitions
         f << post
       end
     end
@@ -99,6 +137,17 @@ module ContentStuff
     def remove_crlf_content
       if self.content
         self.content = self.content.gsub /\r\n?/, "\n"
+      end
+    end
+
+    def merge_definitions
+      if self.content
+        defs = self.parsed_definitions
+        contkeys = self.content_definitions
+        contkeys.each do |key|
+          defs[key] ||= ''
+        end
+        self.parsed_definitions = defs
       end
     end
 
