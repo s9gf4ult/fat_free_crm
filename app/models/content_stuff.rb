@@ -53,7 +53,7 @@ module ContentStuff
       ret = {}
       if self.definitions
         self.definitions.split(/\n/).each do |line|
-          m = /^\ *(#[a-zA-Z_]{1,20}#)(.*)$/.match line
+          m = /^\ *(#[a-zA-Z-]{1,20}#)(.*)$/.match line
           if m
             ret[m[1]] = m[2].strip
           end
@@ -70,7 +70,7 @@ module ContentStuff
     end
 
     def content_definitions
-      self.content.scan(/\\#[a-zA-Z_]{1,20}\\#/).map do |key|
+      self.content.scan(/\\#[a-zA-Z-]{1,20}\\#/).map do |key|
         key.gsub '\#', '#'
       end
     end
