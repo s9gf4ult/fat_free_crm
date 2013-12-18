@@ -20,6 +20,7 @@
     = hook(:javascript_includes, self)
 
     :javascript
+      crm.language = "#{I18n.locale}"
       #{yield :javascript}
       var _ffcrm_users = [
       #{User.all.map{|u| "\"#{u.full_name} (@#{u.username})\"" }.join(",\n")}

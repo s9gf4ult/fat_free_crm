@@ -18,8 +18,6 @@ require 'paperclip'
 require 'simple_form'
 require 'will_paginate'
 require 'authlogic'
-require 'chosen-rails'
-require 'ajax-chosen-rails'
 require 'ransack'
 require 'ransack_ui'
 require 'paper_trail'
@@ -29,6 +27,7 @@ require 'valium'
 require 'ffaker'
 require 'premailer'
 require 'nokogiri'
+require 'font-awesome-rails'
 
 # Load redcloth if available (for textile markup in emails)
 begin

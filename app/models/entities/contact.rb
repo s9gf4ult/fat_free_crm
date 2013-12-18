@@ -40,6 +40,7 @@ class Contact < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :lead
   belongs_to  :assignee, :class_name => "User", :foreign_key => :assigned_to
+  belongs_to  :reporting_user, :class_name => "User", :foreign_key => :reports_to
   has_one     :account_contact, :dependent => :destroy
   has_one     :account, :through => :account_contact
   has_many    :contact_opportunities, :dependent => :destroy
@@ -59,10 +60,10 @@ class Contact < ActiveRecord::Base
 
   accepts_nested_attributes_for :business_address, :allow_destroy => true, :reject_if => proc {|attributes| Address.reject_address(attributes)}
 
-  scope :created_by, lambda { |user| { :conditions => [ "user_id = ?", user.id ] } }
-  scope :assigned_to, lambda { |user| { :conditions => ["assigned_to = ?", user.id ] } }
+  scope :created_by,  ->(user) { where("user_id = ?", user.id) }
+  scope :assigned_to, ->(user) { where("assigned_to = ?", user.id) }
 
-  scope :text_search, lambda { |query|
+  scope :text_search, ->(query) {
     t = Contact.arel_table
     # We can't always be sure that names are entered in the right order, so we must
     # split the query into all possible first/last name permutations.
@@ -92,8 +93,8 @@ class Contact < ActiveRecord::Base
   exportable
   sortable :by => [ "first_name ASC",  "last_name ASC", "created_at DESC", "updated_at DESC" ], :default => "created_at DESC"
 
-  validates_presence_of :first_name, :message => :missing_first_name if Setting.require_first_names
-  validates_presence_of :last_name, :message => :missing_last_name if Setting.require_last_names
+  validates_presence_of :first_name, :message => :missing_first_name, :if => -> { Setting.require_first_names }
+  validates_presence_of :last_name,  :message => :missing_last_name,  :if => -> { Setting.require_last_names  }
   validate :users_for_shared_access
 
   # Default values provided through class methods.

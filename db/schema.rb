@@ -310,6 +310,7 @@ ActiveRecord::Schema.define(:version => 20131217064330) do
     t.text     "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "offer_components", :force => true do |t|
@@ -321,6 +322,8 @@ ActiveRecord::Schema.define(:version => 20131217064330) do
     t.string   "preview_file_name"
     t.text     "definitions"
   end
+
+  add_index "lists", ["user_id"], :name => "index_lists_on_user_id"
 
   create_table "opportunities", :force => true do |t|
     t.integer  "user_id"

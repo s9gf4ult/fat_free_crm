@@ -4,6 +4,7 @@ en-US:
 
   # Generic terms.
   #----------------------------------------------------------------------------
+  id: Id
   all: All
   at: at
   here: here
@@ -171,6 +172,15 @@ en-US:
           final_review: Final Review
           won: Closed/Won
           lost: Closed/Lost
+      account:
+        rating:
+          "0": "-"
+          "1": "★"
+          "2": "★★"
+          "3": "★★★"
+          "4": "★★★★"
+          "5": "★★★★★"
+
   msg_account_suspended: User account has been suspended.
   password_reset_instruction: password reset instructions
 
@@ -585,8 +595,8 @@ en-US:
   save_note: Save Note
   add_note_help: Add a new note...
   edit_note: Edit Note
-  added_ago: added %{value} ago
-  added_by: added %{time_ago} ago by %{user}
+  added_ago: added %{value}
+  added_by: added %{time_ago} by %{user}
   back: Back
   cancel: Cancel
   close_form: Close form
@@ -670,6 +680,7 @@ en-US:
   notifications_tooltip: Subscribers will receive new comments via email
   subscribe_via_email: Subscribe via email
   disable_email_subscriptions: Disable email subscription
+  added_note: added note %{value}
 
   # Views -> Emails.
   #----------------------------------------------------------------------------
@@ -703,6 +714,7 @@ en-US:
   approve: Approve
   create_user: Create User
   last_seen: last seen %{value} ago
+  last_seen2: last seen %{value}
   personal_information: Personal Information
   group_memberships: Group Memberships
   reactivate: Reactivate
@@ -764,7 +776,8 @@ en-US:
 
   # Lists
   #----------------------------------------------------------------------------
-  lists: Lists
+  global_lists: Global lists
+  personal_lists: My lists
   list: List
   no_saved_lists: No saved lists
   make_current_view_list: Make current view a list

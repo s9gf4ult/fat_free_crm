@@ -463,11 +463,35 @@ module ApplicationHelper
         content_tag(:li) do
           url = (action == "index") ? send("redraw_#{controller}_path") : send("#{controller.singularize}_path")
           link_to('#', :title => t(view.name, :default => view.title), :"data-view" => view.name, :"data-url" => url, :"data-context" => action, :class => classes) do
-            image_tag(view.icon || 'brief.png')
+            icon = view.icon || 'fa-bars'
+            content_tag(:i, nil, class: "fa #{icon}")
           end
         end
       end.join('').html_safe
     end
   end
+
+  #----------------------------------------------------------------------------
+  # Generate the html for jQuery.timeago function
+  # <span class="timeago" datetime="2008-07-17T09:24:17Z">July 17, 2008</span>
+  def timeago(time, options = {})
+    options[:class] ||= "timeago"
+    content_tag(:span, time.to_s, options.merge( title: time.getutc.iso8601)) if time
+  end
+
+  #----------------------------------------------------------------------------
+  # Translate List name to FontAwesome icon text
+  def get_icon(name)
+    case name
+      when "tasks" then "fa-check-square-o"
+      when "campaigns" then "fa-bar-chart-o"
+      when "leads" then "fa-tasks"
+      when "accounts" then "fa-users"
+      when "contacts" then "fa-user"
+      when "opportunities" then "fa-money"
+      when "team" then "fa-globe"
+    end
+  end
+
 
 end
