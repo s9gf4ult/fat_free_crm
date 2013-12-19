@@ -1,4 +1,8 @@
 %p#notice= notice
+
+= render "comments/new", :commentable => @offer_component
+= render :partial => "shared/timeline", :collection => @offer_component.comments
+
 %p
   %b Name:
   = @offer_component.name
