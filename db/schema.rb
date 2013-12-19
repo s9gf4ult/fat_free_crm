@@ -320,6 +320,7 @@ ActiveRecord::Schema.define(:version => 20131217064330) do
     t.string   "component_type"
     t.string   "preview_file_name"
     t.text     "definitions"
+    t.text     "subscribed_users"
   end
 
   create_table "opportunities", :force => true do |t|

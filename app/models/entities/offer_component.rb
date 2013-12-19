@@ -9,9 +9,15 @@ class OfferComponent < ActiveRecord::Base
 
   has_many :component_assignments, :dependent => :destroy
   has_many :commercial_offers, :through => :component_assignments
+  has_many :email, :as => :mediator
 
   sortable :by => ["name ASC", "created_at DESC", "updated_at DESC"], :default => "created_at DESC"
-  has_paper_trail
+
+  has_paper_trail :ignore => [ :subscribed_users ]
+  acts_as_commentable
+  uses_user_permissions
+
+  serialize :subscribed_users, Set
 
   scope :of_type, lambda {|comtype| where(:component_type => comtype)}
 
