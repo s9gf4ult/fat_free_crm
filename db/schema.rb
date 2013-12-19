@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131217064330) do
+ActiveRecord::Schema.define(:version => 20131218101041) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20131217064330) do
     t.integer  "document_template_id"
     t.string   "preview_file_name"
     t.text     "definitions"
+    t.text     "subscribed_users"
   end
 
   create_table "component_assignments", :force => true do |t|
@@ -313,6 +314,8 @@ ActiveRecord::Schema.define(:version => 20131217064330) do
     t.integer  "user_id"
   end
 
+  add_index "lists", ["user_id"], :name => "index_lists_on_user_id"
+
   create_table "offer_components", :force => true do |t|
     t.string   "name"
     t.text     "content"
@@ -322,8 +325,6 @@ ActiveRecord::Schema.define(:version => 20131217064330) do
     t.string   "preview_file_name"
     t.text     "definitions"
   end
-
-  add_index "lists", ["user_id"], :name => "index_lists_on_user_id"
 
   create_table "opportunities", :force => true do |t|
     t.integer  "user_id"

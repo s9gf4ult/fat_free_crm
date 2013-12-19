@@ -7,12 +7,18 @@ class CommercialOffer < ActiveRecord::Base
 
   has_many :component_assignments, :dependent => :destroy
   has_many :offer_components, :through => :component_assignments
+  has_many :emails, :as => :mediator
 
   validates :name, :presence => true, :uniqueness => {:scope => :contact_id}
   validates :contact_id, :presence => true
 
   sortable :by => ["name ASC", "created_at DESC", "updated_at DESC"], :default => "created_at DESC"
-  has_paper_trail
+
+  has_paper_trail :ignore => [ :subscribed_users ]
+  acts_as_commentable
+  uses_user_permissions
+
+  serialize :subscribed_users, Set
 
 
   def regenerate_content

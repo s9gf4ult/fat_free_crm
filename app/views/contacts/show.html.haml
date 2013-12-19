@@ -5,7 +5,7 @@
   -# default view
 
   = styles_for :task, :opportunity
-  
+
   = render 'contacts/title_bar', :contact => @contact
 
   = render "comments/new", :commentable => @contact
@@ -18,7 +18,7 @@
     = render :partial => "opportunities/opportunities", :locals => {:object => @contact}
 
     = render :partial => "commercial_offers/commercial_offers"
-    
+
     = render :partial => "versions/versions", :locals => {:object => @contact}
 
     = load_select_popups_for(@contact, :tasks, :opportunities)

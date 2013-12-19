@@ -1,4 +1,8 @@
 %p#notice= notice
+
+= render "comments/new", :commentable => @commercial_offer
+= render :partial => "shared/timeline", :collection => @commercial_offer.comments
+
 %p
   %b Name:
   = @commercial_offer.name
@@ -11,7 +15,7 @@
 
 %p
   = link_to (t :edit_components), edit_components_commercial_offer_path(@commercial_offer)
-  
+
 = link_to 'Edit', edit_commercial_offer_path(@commercial_offer)
 |
 \#{link_to 'Back', commercial_offers_path}
