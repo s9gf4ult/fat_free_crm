@@ -8,6 +8,7 @@ class CommercialOffer < ActiveRecord::Base
   has_many :component_assignments, :dependent => :destroy
   has_many :offer_components, :through => :component_assignments
   has_many :emails, :as => :mediator
+  has_many :tasks, :as => :asset
 
   validates :name, :presence => true, :uniqueness => {:scope => :contact_id}
   validates :contact_id, :presence => true

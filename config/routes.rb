@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       get :edit_components
       post :regenerate_content
       post :attach_document_template
+      post :discard
       resource :content, :only => [:show] do
         member do
           get :download_pdf
