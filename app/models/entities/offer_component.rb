@@ -10,6 +10,7 @@ class OfferComponent < ActiveRecord::Base
   has_many :component_assignments, :dependent => :destroy
   has_many :commercial_offers, :through => :component_assignments
   has_many :email, :as => :mediator
+  has_many :tasks, :as => :asset
 
   sortable :by => ["name ASC", "created_at DESC", "updated_at DESC"], :default => "created_at DESC"
 
@@ -27,5 +28,15 @@ class OfferComponent < ActiveRecord::Base
 where component_assignments.offer_component_id = offer_components.id
 and component_assignments.commercial_offer_id = ?)", comoffer.id)
   }
+
+  # Discard given attachment from the contact.
+  #----------------------------------------------------------------------------
+  def discard!(attachment)
+    if attachment.is_a?(Task)
+      attachment.update_attribute(:asset, nil)
+    else # Opportunities
+      self.send(attachment.class.name.tableize).delete(attachment)
+    end
+  end
 
 end
