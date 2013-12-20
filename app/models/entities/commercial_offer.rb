@@ -21,6 +21,15 @@ class CommercialOffer < ActiveRecord::Base
 
   serialize :subscribed_users, Set
 
+  # Discard given attachment from the contact.
+  #----------------------------------------------------------------------------
+  def discard!(attachment)
+    if attachment.is_a?(Task)
+      attachment.update_attribute(:asset, nil)
+    else # Opportunities
+      self.send(attachment.class.name.tableize).delete(attachment)
+    end
+  end
 
   def regenerate_content
     if self.offer_components.count > 0

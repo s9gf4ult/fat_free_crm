@@ -13,7 +13,6 @@ class TasksController < ApplicationController
   def index
     @view = params[:view] || "pending"
     @tasks = Task.find_all_grouped(current_user, @view)
-
     respond_with @tasks do |format|
       format.xls { render :layout => 'header' }
       format.csv { render :csv => @tasks.map(&:second).flatten }

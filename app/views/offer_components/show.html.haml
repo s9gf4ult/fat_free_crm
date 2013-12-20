@@ -17,3 +17,5 @@
 = link_to 'Edit', edit_offer_component_path(@offer_component)
 |
 \#{link_to 'Back', offer_components_path}
+
+= render :partial => "tasks/tasks", :locals => {:object => @offer_component}

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :offer_components do
     member do
       get :get_copy
+      post :discard
       resource :content, :only => [:show]do
         member do
           get :download_pdf
