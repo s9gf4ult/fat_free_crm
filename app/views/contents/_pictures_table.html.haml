@@ -4,7 +4,7 @@
     - if delete
       %th Delete
     %th Insert
-  - pictures.each do |pic|
+  - pictures.sort.each do |pic|
     %tr
       %td
         %div= File::basename pic
