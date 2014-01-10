@@ -16,3 +16,11 @@
 
 %div
   = link_to "Back", @parent
+
+- content_for :javascript do
+  jQuery(document).ready(function(){
+  jQuery('#submit_download_pdf').click(function(eventObj){
+  jQuery('#template_parent_content').val(jQuery('#parent_content').val());
+  jQuery('#template_parent_definitions').val(jQuery('#parent_definitions').val());
+  });
+  });

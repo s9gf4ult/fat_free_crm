@@ -1,5 +1,7 @@
 %p
-  = form_tag download_pdf_of_path(@parent), :method => :get do
+  = form_tag download_pdf_of_path(@parent), :method => :post do
+    %input{:type => :hidden, :id => "template_parent_content", :name => "template_parent_content"}
+    %input{:type => :hidden, :id => "template_parent_definitions", :name => "template_parent_definitions"}
     .inputs
       %div
         %label{:for => "document_template[id]"} Document template
@@ -7,4 +9,4 @@
           - DocumentTemplate.all.each do |templ|
             %option{:value => templ.id}=  templ.name
     .buttons
-      %input{:type => :submit, :value => "Download pdf"}
+      %input#submit_download_pdf{:type => :submit, :value => "Regenerate pdf"}

@@ -5,7 +5,7 @@ module ContentHelper
   end
 
   def download_pdf_of_path(thing)
-    url_for(thing) << '/content/download_pdf'
+    url_for(thing) << '/content/regenerate_pdf'
   end
 
   def upload_picture_for_path(thing)
