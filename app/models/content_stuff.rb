@@ -116,25 +116,32 @@ module ContentStuff
     end
 
     def run_latex(texfile, program_name)
+      timeout = 40              # 60 secs to wait for processing
       dir = File::dirname texfile
       name = File::basename texfile
       if program_name == "context"
-        texcmd = "#{program_name} --batchmode --noconsole \"#{name}\""
+        texcmd = "#{program_name} --batchmode --noconsole '#{name}'"
       else
         raise Exception.new "uknown program to call"
       end
-      out = `cd "#{dir}" && #{texcmd}`
-      if $? == 0
+
+      p = Process::spawn("cd '#{dir}' && #{texcmd}")
+      res = nil
+      begin
+        Timeout::timeout(timeout) do
+          (n, res) = Process::wait2(p) # wait for pid
+        end
+      rescue Timeout::Error
+        Process.kill('TERM', p)
+      end
+
+      if res && res.success?
         false
       else
         ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
         open(File::join(dir, (File::basename(name, 'tex') << 'log') )) do |f|
           ic.iconv f.read
         end
-        # out.encode('utf8',
-        #            'utf8',
-        #            :invalid => :replace,
-        #            :undef => :replace) # remove invalid symbols from pdflatex
       end
     end
 
