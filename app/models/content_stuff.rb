@@ -39,10 +39,9 @@ module ContentStuff
                          thing_pictures_path(self))
       if File::exists? mydir
         (Dir::entries mydir).find_all do |fn|
-          # puts "#{fn} - #{File::directory?(fn)}"
           not File::directory?(File::join(mydir, fn))
         end.map do |fn|
-          File::join("/", thing_pictures_path(self), fn)
+          File::join(thing_pictures_path(self), fn)
         end
       else
         []
@@ -111,7 +110,7 @@ module ContentStuff
 
       File.open texfile, 'w' do |f|
         f << pre
-        f << "\n\\graphicspath\{ \{#{pubpath}\} \}\n"
+        f << "\n\\setupexternalfigures[directory=#{pubpath}]\n"
         f << self.content_with_definitions
         f << post
       end

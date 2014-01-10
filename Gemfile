@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # gem 'mysql2'
 gem 'sqlite3'
 # gem 'pg'
-gem "unicorn-rails"
+# gem "unicorn-rails"
 
 
 # Allows easy switching between locally developed gems, and gems installed from rubygems.org
