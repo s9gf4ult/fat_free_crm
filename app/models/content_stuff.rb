@@ -118,13 +118,19 @@ module ContentStuff
     def run_latex(texfile, program_name)
       dir = File::dirname texfile
       name = File::basename texfile
-      texcmd = "#{program_name} -halt-on-error \"#{name}\""
-      out = `cd "#{dir}" && #{texcmd} && #{texcmd}`
+      if program_name == "context"
+        texcmd = "#{program_name} --batchmode --noconsole \"#{name}\""
+      else
+        raise Exception.new "uknown program to call"
+      end
+      out = `cd "#{dir}" && #{texcmd}`
       if $? == 0
         false
       else
         ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
-        ic.iconv out            # remove invalid characters
+        open(File::join(dir, (File::basename(name, 'tex') << 'log') )) do |f|
+          ic.iconv f.read
+        end
         # out.encode('utf8',
         #            'utf8',
         #            :invalid => :replace,
