@@ -34,9 +34,13 @@ class CommercialOffer < ActiveRecord::Base
   def regenerate_content
     if self.offer_components.count > 0
       new_content = self.offer_components.map do |component|
-        "\n% ======== BEGIN COMPONENT #{component.component_type}/#{component.name} ======== \n" <<
-          component.content <<
-          "\n% ======== END COMPONENT #{component.component_type}/#{component.name} ======== \n"
+        if component.content && component.content.length > 0
+          "\n% ======== BEGIN COMPONENT #{component.component_type}/#{component.name} ======== \n" <<
+            component.content <<
+            "\n% ======== END COMPONENT #{component.component_type}/#{component.name} ======== \n"
+        else
+          "\n% ========== COMPONENT #{component.component_type}/#{component.name} IS EMPTY !\n"
+        end
       end.join("\n")
 
       self.content = new_content
