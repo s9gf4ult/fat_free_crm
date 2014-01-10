@@ -29,7 +29,6 @@ module ContentStuff
       generate_tex texfn, template
 
       res = run_latex texfn, template.program_name
-      self.save
       res
     end
 

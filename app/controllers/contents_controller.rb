@@ -8,14 +8,20 @@ class ContentsController < ApplicationController
   end
 
   # GET
-  def download_pdf
+  def regenerate_pdf
     @template = DocumentTemplate.find params[:document_template][:id]
+    cont = params['template_parent_content']
+    defs = params['template_parent_definitions']
+    @parent.content = cont
+    @parent.definitions = defs
+    save = !@parent.changed?
     res = @parent.regenerate_preview_file(@template)
     respond_to do |format|
       if res
         @result = res
         format.html { render "error_result" }
       else
+        @parent.save if save
         format.html { render "link_page" }
       end
     end

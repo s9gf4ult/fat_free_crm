@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       post :discard
       resource :content, :only => [:show]do
         member do
-          get :download_pdf
+          post :regenerate_pdf
           post :upload_picture
           post :delete_picture
         end
@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       post :discard
       resource :content, :only => [:show] do
         member do
-          get :download_pdf
+          post :regenerate_pdf
           post :upload_picture
           post :delete_picture
         end
