@@ -1,6 +1,14 @@
 = link_to "Document templates", document_templates_path
 
-= render :partial => "commercial_offers"
+#commercial_offers
+  = render :partial => "commercial_offers"
 
 %hr/
-#paginate= render "shared/paginate_with_per_page"
+#paginate
+  = will_paginate @commercial_offers
+
+%br/
+- unless @contact
+  = link_to 'New Commercial offer', new_commercial_offer_path
+- else
+  = link_to "New Commercial offer", new_commercial_offer_path(:contact_id => @contact.id)
