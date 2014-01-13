@@ -421,5 +421,4 @@ offer_component_types:
 
 document_templates:
   :program_names:
-    - xelatex
-    - pdflatex
+    - context
