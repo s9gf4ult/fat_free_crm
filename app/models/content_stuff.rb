@@ -77,9 +77,17 @@ module ContentStuff
       if self.definitions
         ret = self.content
         self.parsed_definitions.each do |k, v|
+          subk = k.gsub '#', '\#'
           if v && v.length > 0
-            subk = k.gsub '#', '\#'
             ret = ret.gsub subk, v
+          elsif self.respond_to?(:offer_components)
+            pws = Setting['magic_definitions']
+            if pws.has_key? k
+              c = self.offer_components.where(:component_type => pws[k]).first
+              if c
+                ret = ret.gsub subk, c.name
+              end
+            end
           end
         end
         ret
