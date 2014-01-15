@@ -3,4 +3,5 @@
     - if @parent.is_a? CommercialOffer
       = f.input :definitions, :input_html => {:spellcheck => "false", :id => "parent_definitions"}
     = f.input :content, :input_html =>{:spellcheck => "false", :id => "parent_content"}
-    = f.submit
+    = f.submit "Save & exit"
+    = f.submit "Save"

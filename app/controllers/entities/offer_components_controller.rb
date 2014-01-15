@@ -1,4 +1,6 @@
 class OfferComponentsController < EntitiesController
+  include ContentHelper
+
   # GET /offer_components
   # GET /offer_components.json
   def index
@@ -60,7 +62,13 @@ class OfferComponentsController < EntitiesController
 
     respond_to do |format|
       if @offer_component.update_attributes(params[:offer_component])
-        format.html { redirect_to @offer_component, notice: 'Offer component was successfully updated.' }
+        format.html {
+          if params['commit'] && params['commit'].downcase.strip == 'save'
+            redirect_to content_of_path(@offer_component), notice: 'Offer component was successfully updated.'
+          else
+            redirect_to @offer_component, notice: 'Offer component was successfully updated.'
+          end
+        }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
