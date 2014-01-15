@@ -1,4 +1,5 @@
 class CommercialOffersController < EntitiesController
+  include ContentHelper
 
   alias :get_commercial_offers :get_list_of_records
   # GET /commercial_offers
@@ -69,7 +70,13 @@ class CommercialOffersController < EntitiesController
 
     respond_to do |format|
       if @commercial_offer.update_attributes(params[:commercial_offer])
-        format.html { redirect_to @commercial_offer, notice: 'Commercial offer was successfully updated.' }
+        format.html {
+          if params['commit'] && params['commit'].downcase.strip == 'save'
+            redirect_to content_of_path(@commercial_offer), notice: 'Commercial offer was successfully updated.'
+          else
+            redirect_to @commercial_offer, notice: 'Commercial offer was successfully updated.'
+          end
+        }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
