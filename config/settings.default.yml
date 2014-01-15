@@ -405,6 +405,14 @@ offer_component_types:
   - :footer
   - :other
 
+# Magic definitions is done for replacing some definitions to name of first
+# component of specified type.
+magic_definitions:
+  '#POWERSOURCE#': "power_source"
+  '#PORTAL#': 'portal'
+  '#TABLE#': 'table'
+  '#CNC#': 'cnc'
+
 document_templates:
   :program_names:
     - context
