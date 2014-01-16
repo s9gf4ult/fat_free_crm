@@ -2,6 +2,6 @@
   = simple_form_for @parent, :method => :put do |f|
     - if @parent.is_a? CommercialOffer
       = f.input :definitions, :input_html => {:spellcheck => "false", :id => "parent_definitions"}
-    = f.input :content, :input_html =>{:spellcheck => "false", :id => "parent_content"}
+    = f.input :content, :input_html =>{:spellcheck => "false", :id => "parent_content", :rows => "30"}
     = f.submit "Save & exit"
     = f.submit "Save"
