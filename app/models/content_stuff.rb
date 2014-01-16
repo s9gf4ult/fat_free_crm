@@ -17,7 +17,7 @@ module ContentStuff
       fn = File::join(Rails.root,
                       "public",
                       self.preview_file_name)
-      puts fn
+
       dir = File::dirname fn
       unless File::exists? dir
         FileUtils.mkdir_p dir
@@ -156,6 +156,9 @@ module ContentStuff
     def remove_crlf_content
       if self.content
         self.content = self.content.gsub /\r\n?/, "\n"
+      end
+      if self.definitions
+        self.definitions = self.definitions.gsub /\r\n?/, "\n"
       end
     end
 

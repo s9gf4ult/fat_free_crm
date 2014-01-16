@@ -10,8 +10,8 @@ class ContentsController < ApplicationController
   # GET
   def regenerate_pdf
     @template = DocumentTemplate.find params[:document_template][:id]
-    cont = params['template_parent_content']
-    defs = params['template_parent_definitions']
+    cont = params['template_parent_content'].gsub /\r\n?/, "\n"
+    defs = params['template_parent_definitions'].gsub /\r\n?/, "\n"
     @parent.content = cont
     @parent.definitions = defs
     save = !@parent.changed?
