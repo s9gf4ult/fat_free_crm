@@ -16,8 +16,7 @@
     height: auto;
 }
 
-.edit_commercial_offer textarea,
-.edit_offer_component textarea {
+textarea.content-editor {
     width: 100%;
     min-height: 300px;
     font-family: monospace;

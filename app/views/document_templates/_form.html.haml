@@ -3,7 +3,7 @@
   .inputs
     = f.input :name
     = f.input :program_name, :collection => Setting["document_templates"][:program_names]
-    = f.input :content_before
-    = f.input :content_after
+    = f.input :content_before, :input_html => {:spellcheck => false, :class => "content-editor"}
+    = f.input :content_after, :input_html => {:spellcheck => false, :class => "content-editor"}
   .actions
     = f.button :submit
